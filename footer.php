@@ -24,7 +24,7 @@
 		
 			<?php do_action( 'zomghow_credits' ); ?>
 			<a href="http://wordpress.org/" title="<?php esc_attr_e( 'A Semantic Personal Publishing Platform', 'zomghow' ); ?>" rel="generator"><?php printf( __( 'Proudly powered by %s', 'zomghow' ), 'WordPress' ); ?></a>
-			<a class="darren" href="http://darrenmeehan.me/" title="<?php esc_attr_e( 'A Theme built by Darren Meehan', 'zomghow' ); ?>"><?php printf( __( 'Theme by %s', 'zomghow' ), 'Darren' ); ?></a>
+			<a class="darren" href="http://darrenmeehan.me/" title="<?php esc_attr_e( 'Theme by Darren', 'zomghow' ); ?>"><?php printf( __( 'Theme by %s', 'zomghow' ), 'Darren' ); ?></a>
 		
 		</div><!-- .site-info -->
 	</footer><!-- .site-footer .site-footer -->

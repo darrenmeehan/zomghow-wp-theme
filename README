@@ -1,5 +1,6 @@
 Description: A tidy theme created to put content first. It features a minimalist header, one sidebar and 4 widgets in the footer that are hidden until you use them. ZOMGHOW trys to keep things simple, only including things that are needed. 
 
-
 TODO:
 Fix theme up to meet WordPress.org guidelines as per http://themes.trac.wordpress.org/ticket/8567
+
+Must also look into how I'm meant to set the repo up, as its a fork of _s

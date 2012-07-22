@@ -1,15 +1,15 @@
 <?php
 /**
- * Zomghow functions and definitions
+ * ZOMGHOW functions and definitions
  *
- * @package Zomghow
- * @since Zomghow 1.0
+ * @package ZOMGHOW
+ * @since ZOMGHOW 1.0
  */
 
 /**
  * Set the content width based on the theme's design and stylesheet.
  *
- * @since Zomghow 1.0
+ * @since ZOMGHOW 1.0
  */
 if ( ! isset( $content_width ) )
 	$content_width = 640; /* pixels */
@@ -22,7 +22,7 @@ if ( ! function_exists( 'zomghow_setup' ) ):
  * before the init hook. The init hook is too late for some features, such as indicating
  * support post thumbnails.
  *
- * @since Zomghow 1.0
+ * @since ZOMGHOW 1.0
  */
 function zomghow_setup() {
 
@@ -34,8 +34,6 @@ function zomghow_setup() {
 	/**
 	 * Make theme available for translation
 	 * Translations can be filed in the /languages/ directory
-	 * If you're building a theme based on Zomghow, use a find and replace
-	 * to change 'zomghow' to the name of your theme in all the template files
 	 */
 	load_theme_textdomain( 'zomghow', get_template_directory() . '/languages' );
 
@@ -67,7 +65,7 @@ add_action( 'after_setup_theme', 'zomghow_setup' );
 /**
  * Register widgetized area and update sidebar with default widgets
  *
- * @since Zomghow 1.0
+ * @since ZOMGHOW 1.0
  */
 function zomghow_widgets_init() {
 	register_sidebar( array(
@@ -142,5 +140,49 @@ function zomghow_scripts() {
 	if ( is_singular() && wp_attachment_is_image( $post->ID ) ) {
 		wp_enqueue_script( 'keyboard-image-navigation', get_template_directory_uri() . '/js/keyboard-image-navigation.js', array( 'jquery' ), '20120202' );
 	}
+	
+// add ie conditional html5 shim to header, if the browser is IE
+	global $is_IE;
+	if ($is_IE)
+	{
+   	echo '<!--[if lt IE 9]>';
+    echo '<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>';
+    echo '<![endif]-->';
+	}
+
 }
 add_action( 'wp_enqueue_scripts', 'zomghow_scripts' );
+
+
+// filter function for wp_title
+// credit to http://wikiduh.com/1102/using-the-wp_title-filter-in-wordpress
+
+function zomghow_filter_wp_title( $old_title, $sep, $sep_location ){
+ 
+// add padding to the sep
+$ssep = ' ' . $sep . ' ';
+ 
+// find the type of index page this is
+if( is_category() ) $insert = $ssep . 'Category';
+elseif( is_tag() ) $insert = $ssep . 'Tag';
+elseif( is_author() ) $insert = $ssep . 'Author';
+elseif( is_year() || is_month() || is_day() ) $insert = $ssep . 'Archives';
+else $insert = NULL;
+ 
+// get the page number we're on (index)
+if( get_query_var( 'paged' ) )
+$num = $ssep . 'page ' . get_query_var( 'paged' );
+ 
+// get the page number we're on (multipage post)
+elseif( get_query_var( 'page' ) )
+$num = $ssep . 'page ' . get_query_var( 'page' );
+ 
+// else
+else $num = NULL;
+ 
+// concoct and return new title
+return get_bloginfo( 'name' ) . $insert . $old_title . $num;
+}
+
+// call our custom wp_title filter, with normal (10) priority, and 3 args
+add_filter( 'wp_title', 'zomghow_filter_wp_title', 10, 3 );

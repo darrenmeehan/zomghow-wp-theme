@@ -22,7 +22,7 @@
 			
 		<div class="site-info">
 		
-			<?php do_action( 'zomghow_credits' ); ?>
+			<?php do_action( 'zomghow_credits' ,'zomghow' ); ?>
 			<a href="http://wordpress.org/" title="<?php esc_attr_e( 'A Semantic Personal Publishing Platform', 'zomghow' ); ?>" rel="generator"><?php printf( __( 'Proudly powered by %s', 'zomghow' ), 'WordPress' ); ?></a>
 			<a class="darren" href="http://darrenmeehan.me/" title="<?php esc_attr_e( 'Theme by Darren', 'zomghow' ); ?>"><?php printf( __( 'Theme by %s', 'zomghow' ), 'Darren' ); ?></a>
 		
